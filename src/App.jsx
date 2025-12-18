@@ -1,35 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import Layout from "./components/Layout.jsx";
 
-function App() {
-  const [count, setCount] = useState(0)
+import Home from "./pages/Home.jsx";
+import CatalogFnb from "./pages/CatalogFnb.jsx";
+import ProductDetail from "./pages/ProductDetail.jsx";
+import Order from "./pages/Order.jsx";
+
+import Tailoring from "./pages/Tailoring.jsx";
+import TailoringDetail from "./pages/TailoringDetail.jsx";
+import Quote from "./pages/Quote.jsx";
+
+import HowToOrder from "./pages/HowToOrder.jsx";
+import Policies from "./pages/Policies.jsx";
+import Testimonials from "./pages/Testimonials.jsx";
+import Contact from "./pages/Contact.jsx";
+import NotFound from "./pages/NotFound.jsx";
+
+import AdminLogin from "./pages/AdminLogin.jsx";
+import Admin from "./pages/Admin.jsx";
+
+export default function App() {
+  const nav = useNavigate();
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<Home />} />
 
-export default App
+        <Route path="/catalog" element={<Navigate to="/catalog/fnb" replace />} />
+        <Route path="/catalog/fnb" element={<CatalogFnb />} />
+        <Route path="/fnb/:slug" element={<ProductDetail />} />
+        <Route path="/order/:slug" element={<Order />} />
+
+        <Route path="/tailoring" element={<Tailoring />} />
+        <Route path="/tailoring/:slug" element={<TailoringDetail />} />
+        <Route path="/quote/:slug" element={<Quote />} />
+
+        <Route path="/how-to-order" element={<HowToOrder />} />
+        <Route path="/policies" element={<Policies />} />
+        <Route path="/testimonials" element={<Testimonials />} />
+        <Route path="/contact" element={<Contact />} />
+
+        <Route path="/admin/login" element={<AdminLogin onSuccess={() => nav("/admin")} />} />
+        <Route path="/admin" element={<Admin onAuthedFail={() => nav("/admin/login")} />} />
+
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
+  );
+}

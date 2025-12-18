@@ -1,0 +1,15 @@
+{
+  "fnb": [
+    {
+      "name": "test-product",
+      "slug": "test-product",
+      "price": 120000,
+      "unit": "10",
+      "leadTime": "2 jam",
+      "description": "teawdbaiopuwbdipuqbwdou9ibqouwd",
+      "imageUrl": "https://pbs.twimg.com/media/G8IAu8nbMAEQD-G?format=jpg&name=large"
+    }
+  ],
+  "tailoring": [],
+  "updatedAt": 1766022660227
+}
